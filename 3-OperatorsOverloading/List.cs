@@ -164,9 +164,7 @@ namespace OperatorsOverloading
         public static List<TValue> operator +(List<TValue> list1, List<TValue> list2)
         {
             
-          return (List<TValue>)Enumerable.Concat(list1.ToFlat(),list2.ToFlat());
-           
-
+          return List.Append(list1,list2);
         }
 
         /// <summary>
@@ -178,7 +176,9 @@ namespace OperatorsOverloading
         /// <returns>the result list.</returns>
         public static List<TValue> operator -(List<TValue> list1, List<TValue> list2)
         {
-            return (List<TValue>)Enumerable.Except(list1.ToFlat(),list2.ToFlat());
+             var second = list2.ToFlat().ToList();
+            return List.From(list1.ToFlat().Where(x => !second.Contains(x)));
+            
         }
 
         /// <summary>
